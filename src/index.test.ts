@@ -12,6 +12,6 @@ test("", () => {
 	const dom = new JSDOM(`
 		<!DOCTYPE html><p>Hi!</p><p>Hello!</p>
 		`);
-	const result = dom.window.document.querySelectorAll("p")[0];
-	deepEqual(result, dom.window.document.createElement("p"));
+	const result = dom.window.document.querySelectorAll("p").length;
+	deepEqual(result, 2);
 });
