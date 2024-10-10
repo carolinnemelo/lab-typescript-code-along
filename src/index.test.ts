@@ -1,29 +1,17 @@
-import { deepEqual } from "node:assert/strict";
+import { equal, deepEqual } from "node:assert/strict";
 import test from "node:test";
-
-const data = [
-	{
-		id: "76579987-5003-4a50-a31a-a561021479a3",
-		name: "Carlos Doe",
-	},
-	{
-		id: "e515a8b0-acb5-456f-8ded-c7c1f632f408",
-		name: "john Doe",
-	},
-];
-
-type Person = {
-	id: string;
-	name: string;
-};
-
-function uppercaseName(names: Person[]) {
-    return [];
-}
+import { JSDOM } from "jsdom";
 
 test("uppercaseNames works with empty array", () => {
-	const result = uppercaseName([]);
+	const dom = new JSDOM(`<!DOCTYPE html><p>Hi!</p>`);
 
-	deepEqual(result, []);
+	equal(dom.window.document.querySelector("p")!.textContent, "Hi!");
 });
 
+test("", () => {
+	const dom = new JSDOM(`
+		<!DOCTYPE html><p>Hi!</p><p>Hello!</p>
+		`);
+	const result = dom.window.document.querySelectorAll("p")[0];
+	deepEqual(result, dom.window.document.createElement("p"));
+});
